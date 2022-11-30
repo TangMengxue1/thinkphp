@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./app.js"></script>
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            background: #0099ff;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        form {
+            padding: 5px;
+        }
+
+        form input {
+            width: 98%;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"] {
+            margin-top: 10px;
+            background: #0099ff;
+            color: white;
+            font-size: 14px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        .err-hint {
+            display: none;
+            margin: 0;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>登录</h1>
+    </header>
+    <form action="" method="post" onsubmit="login(event)">
+        <h2>我要登录</h2>
+        <div>
+            <label for="">姓名</label>
+            <input type="text" name="username" placeholder="请输入姓名">
+        </div>
+        <div>
+            <label for="">密码</label>
+            <input type="password" name="password" placeholder="请输入密码">
+        </div>
+        <p class="err-hint">请输入用户名</p>
+        <input type="submit" value="提交">
+    </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        var err_hint = document.querySelector('.err-hint');
+        function showErr(err) {
+            err_hint.style.display = 'block';
+            err_hint.innerText = err;
+        }
+        function login(e) {
+            e.preventDefault();
+            //1. 获取数据
+            var username = document.querySelector('input[name=username]').value;
+            var password = document.querySelector('input[name=password]').value;
+            // console.log(username, password);
+            //2. 规则验证
+            var reg1 = /^[A-z]/;
+            var reg2 = /^[A-z]\S{2,9}/;
+            if (!reg1.test(username)) {
+                showErr('必须以字母开头')
+                return;
+            }
+            if (!reg2.test(username)) {
+                err_hint.style.display = 'block';
+                err_hint.innerText = '长度必须是3~10位的非空白字符';
+                return
+            }
+
+            //3. 登录请求
+            $.ajax({
+                url: remote_url+'/api/login/login',
+                method: 'post',
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (res) {
+                    res = JSON.parse(res);
+                    console.log(res.code);
+                    if (res.code == 200) {
+                        localStorage.token=res.data.token;
+                        localStorage.username=res.data.username;
+                        location.href = './home1.html'
+                    } else {
+                        err_hint.style.display = 'block';
+                        err_hint.innerText = res.message;
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            err_hint.style.display = 'none';
+            // location.href = './home.html'
+        }
+    </script>
+</body>
+
+</html>

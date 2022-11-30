@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        header {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #000000;
+        }
+        header img {
+            width: 30px;
+            height: 30px;
+            margin-top: 10px;
+            margin-left: 8px;
+        }
+        .banner img {
+            width: 100%;
+        }
+        .type {
+            font-size: 14px;
+        }
+        .type>:last-child {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<header onclick="history.go(-1)">
+    <img src="./img/return.png" alt="">
+</header>
+<div class="banner">
+    <img src="./img/nav1.png" alt="">
+</div>
+<article>
+    <h1 id="title">关于午餐补贴、虚拟现金电子钱包更新的通知</h1>
+    <p class="type">
+        <span>分类：<span id="type">创业加盟</span></span>
+        <span>发布日期：<span id="time">2020-10-24</span></span>
+    </p>
+    <hr>
+    <div id="content">
+        <h1>正文内容</h1>
+        <p>hahajgjhg</p>
+    </div>
+</article>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    window.onload = function(){
+        var reg = /id=(\d+)/;
+        var arr = reg.exec(location.search);
+        var id = arr[1]
+        console.log(id);
+        $.ajax({
+                url: '../api/newsdetail.php',
+                data: {id: id},
+                success: function (res) {
+                    res = JSON.parse(res);
+                    console.log(res);
+                    var news = res.data
+                    document.getElementById('type').innerText = news.name;
+                    var banner = document.querySelector('.banner img');
+                    banner.setAttribute('src', '../server/uploads/'+news.img);
+                    document.getElementById('content').innerHTML = news.content;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+    }
+</script>
+</body>
+</html>

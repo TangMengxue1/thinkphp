@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./app.js"></script>
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            border-bottom: 1px solid lightgray;
+        }
+
+        header h1 {
+            margin: 5px;
+            font-size: 20px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        #banner img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        #banner img:nth-of-type(2),
+        #banner img:nth-of-type(3) {
+            display: none;
+        }
+
+        #banner button {
+            border-radius: 50%;
+            border: none;
+            outline: none;
+        }
+
+        #banner button:nth-of-type(1) {
+            position: absolute;
+            top: 130px;
+        }
+
+        #banner button:nth-of-type(2) {
+            position: absolute;
+            right: 0;
+            top: 130px;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            list-style: none;
+        }
+
+        #nav li {
+            text-align: center;
+        }
+
+        #nav p {
+            text-align: center;
+        }
+
+        #nav img {
+            width: 50px;
+        }
+
+        #content {
+            border-top: 10px solid lightgray;
+            border-bottom: 1px solid lightgray;
+        }
+
+        #content ul {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        #content li {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            list-style: none;
+        }
+
+        #content .active {
+            color: #0099ff;
+            border-bottom: 1px solid #42a5f3;
+        }
+
+        article {
+            padding-bottom: 52px;
+        }
+
+        article .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+            border-bottom: 1px solid lightgray;
+        }
+
+        article img {
+            width: 100px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        .footer .fonav {
+            display: flex;
+            justify-content: space-around;
+            /*补充样式*/
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            font-size: 12px;
+            background: white;
+            border-top: 1px solid #EEEDED;
+        }
+
+        .footer .footer-title {
+            flex: 1;
+            /*补充样式*/
+            display: inline-block;
+            color: #444444;
+            padding: 30px 0 0 0;
+        }
+
+        .footer .footer0 {
+            background: url(./img/h1.png)no-repeat center 3px;
+            background-size: 25px 25px;
+        }
+
+        .footer .footer1 {
+            background: url(./img/h2.png)no-repeat center 3px;
+            background-size: 25px 25px;
+        }
+
+        .footer .footer2 {
+            background: url(./img/h3.png)no-repeat center 3px;
+            background-size: 25px 25px;
+        }
+
+        .footer .footer3 {
+            background: url(./img/h4.png)no-repeat center 3px;
+            background-size: 25px 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>创业平台</h1>
+    </header>
+    <div id="banner">
+        <img src="./img/banner1.png" alt="">
+        <img src="./img/banner2.png" alt="">
+        <img src="./img/banner3.png" alt="">
+        <div>
+            <button onclick="changeBanner(-1)"> &lt; </button>
+            <button onclick="changeBanner(1)"> &gt; </button>
+        </div>
+    </div>
+    <ul id="nav">
+        <li>
+            <img src="./img/nav1.png" alt="">
+            <p>团队帮扶</p>
+        </li>
+        <li>
+            <img src="./img/nav2.png" alt="">
+            <p>创业加盟</p>
+        </li>
+        <li>
+            <img src="./img/nav3.png" alt="">
+            <p>资料中心</p>
+        </li>
+        <li>
+            <img src="./img/nav4.png" alt="">
+            <p>FOC资料</p>
+        </li>
+    </ul>
+    <div id="content">
+        <ul>
+            <li class="active" onclick="changeTab(event, data1)">平台时讯</li>
+            <li onclick="changeTab(event, data2)">创业教育</li>
+            <li onclick="changeTab(event, data3)">购物中心</li>
+        </ul>
+    </div>
+    <article>
+    </article>
+    <footer class="footer">
+        <div class="fonav">
+            <a class="footer-title footer0 " href="./home.html">
+                首页 </a>
+            <a class="footer-title footer1 " href="./wallet.html">
+                钱包 </a>
+            <a class="footer-title footer2 " href="./market.html">
+                交易 </a>
+            <a class="footer-title footer3 " href="./personal.html">
+                我的 </a>
+        </div>
+    </footer>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        var index = 0;
+        var timer;
+        var imgs = document.querySelectorAll('#banner img');
+        function setTimer() {
+            return setInterval(function () {
+                imgs[index].style.display = 'none'
+                index = ++index > 2 ? 0 : index;
+                imgs[index].style.display = 'inline-block'
+            }, 3000)
+        }
+        function changeBanner(step) {
+            imgs[index].style.display = 'none'
+            index = index + step;
+            if (index > 2) {
+                index = 0;
+            } else if (index < 0) {
+                index = 2;
+            }
+            imgs[index].style.display = 'inline-block'
+            //重启定时器
+            clearInterval(timer);
+            timer = setTimer()
+
+        }
+        function changeTab(e, id) {
+            //1. 清除所有同级li actove
+            for (const item of e.target.parentElement.children) {
+                item.setAttribute('class', '');
+            }
+            //2. 给自己加上active
+            e.target.setAttribute('class', 'active');
+            //3. 加载数据
+            load(id);
+        }
+        function load(id) {
+            $.ajax({
+                url: remote_url+'/api/news/index',
+                data: {id: id},
+                success: function (res) {
+                    res = JSON.parse(res);
+                    console.log(res);
+                    var article = document.querySelector('article');
+                    var contents = '';
+                    for (const key in res.data) {
+                        var item = res.data[key];
+                        contents += `<div onclick="location.href='./newsdetail.html?id=${item.id}'" class="item">
+                    <div>
+                        <h3>${item.title}</h3>
+                        <p>${item.create_time}</p>
+                    </div>
+                    <img src="../server/uploads/${item.img}" alt="">
+                </div>`
+                    }
+                    article.innerHTML = contents;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+
+        function initData() {
+            //1. 请求新闻分类
+            $.ajax({
+                url:remote_url+'/api/news/types',
+                data:{
+                    'username':localStorage.getItem('username'),
+                    'token':localStorage.getItem('token')
+                },
+                success: function (res) {
+                    res = JSON.parse(res);
+                    console.log(res);
+                    if (res.code == 200) {
+                        var contents = '';
+                        for (let index = 0; index < res.data.length; index++) {
+                            const type = res.data[index];
+                            if (index == 0) {
+                                contents += `<li class="active" onclick="changeTab(event, ${type.id})">${type.name}</li>`;
+                            } else {
+                                contents += `<li onclick="changeTab(event, ${type.id})">${type.name}</li>`;
+                            }
+                        }
+                    }
+                    var ul = document.querySelector('#content ul');
+                    ul.innerHTML = contents;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            //2. 请求新闻列表
+            load();
+        }
+        window.onload = function () {
+            //轮播图：全部隐藏， 每隔一段时间，让一个显示
+            timer = setTimer()
+
+            //加载数据
+            // load(data1)
+            initData();
+        }
+        var data1 = [
+            {
+                id: 1,
+                title: '用户输入用户名密码后点击登录按钮',
+                create_time: '2022年9月14日 08:51:45',
+                img: './img/nav1.png'
+            },
+            {
+                id: 2,
+                title: '用户名的长度必须是3~10位的非空白字符',
+                create_time: '2022年9月15日 08:51:45',
+                img: './img/nav2.png'
+            },
+            {
+                id: 1,
+                title: '热烈欢迎创商邦成立再次热烈欢迎创商邦成立',
+                create_time: '2022年9月16日 08:51:45',
+                img: './img/nav3.png'
+            },
+        ]
+        var data2 = [
+            {
+                id: 4,
+                title: '欢迎欢迎后点击登录按钮',
+                create_time: '2022年9月24日 08:51:45',
+                img: './img/nav4.png'
+            }
+        ]
+        var data3 = [
+            {
+                id: 5,
+                title: '欢迎欢迎后点击登录按钮',
+                create_time: '2022年9月24日 08:51:45',
+                img: './img/nav1.png'
+            }
+        ]
+    </script>
+</body>
+
+</html>

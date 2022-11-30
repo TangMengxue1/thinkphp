@@ -16,5 +16,5 @@ function json($code,$message,$data=[]){
         'message'=>$message,
         'data'=>$data,
     ];
-     return $data;
+     exit(json_encode($data,JSON_UNESCAPED_UNICODE));
 }

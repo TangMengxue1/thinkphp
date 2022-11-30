@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            background: #0099FF;
+            color: #fff;
+        }
+
+        header>h1 {
+            text-align: center;
+        }
+
+        h1,
+        h2 {
+            font-size: 20px;
+        }
+
+        header>div {
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        header div:nth-of-type(2) {
+            margin-left: 20px;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            list-style: none;
+        }
+
+        #nav p {
+            text-align: center;
+        }
+
+        #nav img {
+            width: 50px;
+        }
+
+        form {
+            padding: 5px;
+        }
+
+        form input {
+            width: 98%;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"] {
+            margin-top: 10px;
+            background: #0099ff;
+            color: white;
+            font-size: 14px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        #desc {
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        #desc p:last-child {
+            color: #999;
+        }
+
+        footer img {
+            width: 40px;
+        }
+        
+        footer ul {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+        #test p:nth-of-type(3){
+            background: red;
+        }
+        #test p:nth-child(3){
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="test">
+        <p>第一个段落。</p>
+        <h1>我是标题1</h1>
+        <p>第二个段落。</p>
+        <p>第三个段落。</p>
+        <p>第四个段落。</p>
+        <p>第五个段落。</p>    
+    </div> -->
+    <header>
+        <h1>个人中心</h1>
+        <div>
+            <img src="../img/bingge.jpg" alt="">
+        </div>
+        <div>
+            <p>用户名：<span>兵哥学编程</span></p>
+            <p>等级：<span>老师</span></p>
+        </div>
+    </header>
+    <ul id="nav">
+        <li>
+            <img src="../img/nav1.png" alt="">
+            <p>首页</p>
+        </li>
+        <li>
+            <img src="../img/nav2.png" alt="">
+            <p>帮忙</p>
+        </li>
+        <li>
+            <img src="../img/nav3.png" alt="">
+            <p>资料</p>
+        </li>
+    </ul>
+    <form action="" method="post">
+        <h2>我要登录</h2>
+        <div>
+            <label for="">姓名</label>
+            <input type="text" name="username" placeholder="请输入姓名">
+        </div>
+        <div>
+            <label for="">密码</label>
+            <input type="password" name="password" placeholder="请输入密码">
+        </div>
+
+        <input type="submit" value="提交">
+    </form>
+    <div id="desc">
+        <p>说明</p>
+        <p>链接属于行内元素, 但是此时需要宽度高度,因此需要模式转换. 里面文字需要水平居中和垂直居中. 因此需要单行文字垂直居中的代码. 链接里面需要设置背景图片.因此需要用到背景的相关属性设置.
+            鼠标经过变化背景图片,因此需要用到链接伪类选择器.</p>
+    </div>
+    <footer>
+        <ul>
+            <li>
+                <img src="../img/h1.png" alt="">
+                <p>首页</p>
+            </li>
+            <li>
+                <img src="../img/h2.png" alt="">
+                <p>钱包</p>
+            </li>
+            <li>
+                <img src="../img/h3.png" alt="">
+                <p>交易</p>
+            </li>
+            <li>
+                <img src="../img/h4.png" alt="">
+                <p>我的</p>
+            </li>
+        </ul>
+    </footer>
+</body>
+
+</html>
